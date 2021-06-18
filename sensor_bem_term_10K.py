@@ -144,6 +144,17 @@ def plot_temp1(t1y, inicio):
     plt.clf()
 
 
+def plot_temp2(t2y, inicio):
+    t2x = range(len(t2y))
+    file = f'/home/fernando/Área de Trabalho/TEMP2/Temperatura_Externa{inicio}.pdf'
+    plt.title(f'-> Inicio: {inicio}\n-> Termino: {data()}\nGráfico Temp Externa')
+    plt.xlabel('Tempo em segundos.')
+    plt.ylabel('Temperatura em °C')
+    plt.plot(t2x, t2y)
+    plt.savefig(file)
+    plt.clf()
+
+
 def flagEntry():
     opition = ''
     cont = 0
@@ -209,11 +220,13 @@ def main():
         uy = []
         py = []
         t1y = []
+        t2y = []
 
         d1 = {
             'u': '',
             'p': '',
             '1': '',
+            '2': ''
         }
 
         cont2 = 0
@@ -229,6 +242,8 @@ def main():
                         d1['p'] = float(dado[1:].strip())
                     if dado[0] == '1':
                         d1['1'] = float(dado[1:].strip())
+                    if dado[0] == '2':
+                        d1['2'] = float(dado[1:].strip())
                 except (ValueError, IndexError):
                     continue
                 cont += 1
@@ -239,7 +254,7 @@ def main():
                     uy.append(float(d1['u']))
                     py.append(float(d1['p']))
                     t1y.append(float(d1['1']))
-                    # t2y.append(float(d1['2']))
+                    t2y.append(float(d1['2']))
                     cont2 += 1
                     time.sleep(1)
                 except ValueError:
@@ -248,7 +263,7 @@ def main():
         plot_umidade(uy, inicio)
         plot_pressao(py, inicio)
         plot_temp1(t1y, inicio)
-        # plot_temp2(t2y, inicio)
+        plot_temp2(t2y, inicio)
         cont3 += 1
         emaail = EmailThread(inicio)
         emaail.start()
