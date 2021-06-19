@@ -199,10 +199,10 @@ def main():
             print('O valor inicial não foi encontrado.')
             return None
         try:
-            umi = [float(x[1]) for x in lista[pos1:pos2]]
-            pres = [float(x[2]) for x in lista[pos1:pos2]]
-            temp1 = [float(x[3]) for x in lista[pos1:pos2]]
-            temp2 = [float(x[4][:-2])for x in lista[pos1:pos2]]
+            umi = [round(float(x[1]), 2) for x in lista[pos1:pos2]]
+            pres = [round(float(x[2]), 2) for x in lista[pos1:pos2]]
+            temp1 = [round(float(x[3]), 2) for x in lista[pos1:pos2]]
+            temp2 = [round(float(x[4][:-2]), 2) for x in lista[pos1:pos2]]
             plot_graf(umi, inicio, termino, 'Umidade')
             plot_graf(pres, inicio, termino, 'Pressao')
             plot_graf(temp1, inicio, termino, 'Temp Int')
