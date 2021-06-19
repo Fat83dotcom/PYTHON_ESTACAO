@@ -250,7 +250,7 @@ def main():
             with open('log_bme280.csv', 'a+', newline='', encoding='utf-8') as file:
                 try:
                     w = csv.writer(file)
-                    w.writerow([data(), d1['u'], d1['p'], d1['1']])
+                    w.writerow([data(), d1['u'], d1['p'], d1['1'], d1['2']])
                     uy.append(float(d1['u']))
                     py.append(float(d1['p']))
                     t1y.append(float(d1['1']))
