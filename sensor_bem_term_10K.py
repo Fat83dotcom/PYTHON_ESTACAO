@@ -211,8 +211,8 @@ def main():
     cont3 = 0
     while 1:
         if cont3 == 0:
-            print(f'Inicio: --> {data()} <--')
             tempo_graf = int(flagEntry())
+            print(f'Inicio: --> {data()} <--')v
             arduino.reset_input_buffer()
         else:
             print(f'Parcial {cont3} --> {data()} <--')
