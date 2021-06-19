@@ -37,7 +37,7 @@ class EmailThread(Thread):
             umidade = f'/home/fernando/Área de trabalho/UMIDADE/Umidade{self.inicio}.pdf'
             pressao = f'/home/fernando/Área de trabalho/PRESSAO/Pressao{self.inicio}.pdf'
             tmp1 = f'/home/fernando/Área de trabalho/TEMP1/Temperatura_Interna{self.inicio}.pdf'
-            # temp2 = f'/home/fernando/Área de trabalho/TEMP2/Temperatura_Externa{self.inicio}.pdf'
+            temp2 = f'/home/fernando/Área de trabalho/TEMP2/Temperatura_Externa{self.inicio}.pdf'
             # log = '/home/fernando/PYTHON_PIPENV_ESTACAO_METEREO/log_bme280.csv'
 
             with open(umidade, 'rb') as pdf_U:
@@ -58,11 +58,11 @@ class EmailThread(Thread):
                 anexo_T1.add_header('Conteudo', tmp1)
                 msg.attach(anexo_T1)
 
-            # with open(temp2, 'rb') as pdf_T2:
-            #     anexo_T2 = MIMEApplication(pdf_T2.read(), _subtype='pdf')
-            #     pdf_T2.close()
-            #     anexo_T2.add_header('Conteudo', temp2)
-            #     msg.attach(anexo_T2)
+            with open(temp2, 'rb') as pdf_T2:
+                anexo_T2 = MIMEApplication(pdf_T2.read(), _subtype='pdf')
+                pdf_T2.close()
+                anexo_T2.add_header('Conteudo', temp2)
+                msg.attach(anexo_T2)
 
             # with open(log, 'rb') as csv_file:
             #     anexo_csv = MIMEApplication(csv_file.read(), _subtype='csv')
@@ -146,7 +146,7 @@ def plot_temp1(t1y, inicio):
 
 def plot_temp2(t2y, inicio):
     t2x = range(len(t2y))
-    file = f'/home/fernando/Área de Trabalho/TEMP2/Temperatura_Externa{inicio}.pdf'
+    file = f'/home/fernando/Área de trabalho/TEMP2/Temperatura_Externa{inicio}.pdf'
     plt.title(f'-> Inicio: {inicio}\n-> Termino: {data()}\nGráfico Temp Externa')
     plt.xlabel('Tempo em segundos.')
     plt.ylabel('Temperatura em °C')
@@ -213,6 +213,7 @@ def main():
         if cont3 == 0:
             print(f'Inicio: --> {data()} <--')
             tempo_graf = int(flagEntry())
+            arduino.reset_input_buffer()
         else:
             print(f'Parcial {cont3} --> {data()} <--')
         inicio = data()
@@ -232,7 +233,7 @@ def main():
         cont2 = 0
         while cont2 < tempo_graf:
             cont = 0
-            while cont < 4:
+            while cont < 8:
                 dado = str(arduino.readline())
                 dado = dado[2:-5]
                 try:
