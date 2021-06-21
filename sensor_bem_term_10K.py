@@ -111,10 +111,18 @@ def data():
     return data
 
 
+def maxi(dados):
+    return round(max(dados), 2)
+
+
+def mini(dados):
+    return round(min(dados), 2)
+
+
 def plot_umidade(uy, inicio):
     ux = range(len(uy))
     file = f'/home/fernando/Área de trabalho/UMIDADE/Umidade{inicio}.pdf'
-    plt.title(f'-> Inicio: {inicio}\n-> Termino: {data()}\nGráfico Umidade')
+    plt.title(f'Gráfico Umidade\n-> Inicio: {inicio} <-|-> Termino: {data()} <-\nMáxima: {maxi(uy)} --- Mínima: {mini(uy)}')
     plt.xlabel('Tempo em segundos.')
     plt.ylabel('Umidade Relativa do Ar %')
     plt.plot(ux, uy)
@@ -125,7 +133,7 @@ def plot_umidade(uy, inicio):
 def plot_pressao(py, inicio):
     px = range(len(py))
     file = f'/home/fernando/Área de trabalho/PRESSAO/Pressao{inicio}.pdf'
-    plt.title(f'-> Inicio: {inicio}\n-> Termino: {data()}\nGráfico Pressão')
+    plt.title(f'Gráfico Pressão\n-> Inicio: {inicio} <-|-> Termino: {data()} <-\nMáxima: {maxi(py)} --- Mínima: {mini(py)}')
     plt.xlabel('Tempo em segundos.')
     plt.ylabel('Pressão Atmosferica em hPa')
     plt.plot(px, py)
@@ -136,7 +144,7 @@ def plot_pressao(py, inicio):
 def plot_temp1(t1y, inicio):
     t1x = range(len(t1y))
     file = f'/home/fernando/Área de trabalho/TEMP1/Temperatura_Interna{inicio}.pdf'
-    plt.title(f'-> Inicio: {inicio}\n-> Termino: {data()}\nGráfico Temp Interna')
+    plt.title(f'Gráfico Temp Interna\n-> Inicio: {inicio} <-|-> Termino: {data()} <-\nMáxima: {maxi(t1y)} --- Mínima: {mini(t1y)}')
     plt.xlabel('Tempo em segundos.')
     plt.ylabel('Temperatura em °C')
     plt.plot(t1x, t1y)
@@ -147,7 +155,7 @@ def plot_temp1(t1y, inicio):
 def plot_temp2(t2y, inicio):
     t2x = range(len(t2y))
     file = f'/home/fernando/Área de trabalho/TEMP2/Temperatura_Externa{inicio}.pdf'
-    plt.title(f'-> Inicio: {inicio}\n-> Termino: {data()}\nGráfico Temp Externa')
+    plt.title(f'Gráfico Temp Externa\n-> Inicio: {inicio} <-|-> Termino: {data()} <-\nMáxima: {maxi(t2y)} --- Mínima: {mini(t2y)}')
     plt.xlabel('Tempo em segundos.')
     plt.ylabel('Temperatura em °C')
     plt.plot(t2x, t2y)
@@ -212,7 +220,7 @@ def main():
     while 1:
         if cont3 == 0:
             tempo_graf = int(flagEntry())
-            print(f'Inicio: --> {data()} <--')v
+            print(f'Inicio: --> {data()} <--')
             arduino.reset_input_buffer()
         else:
             print(f'Parcial {cont3} --> {data()} <--')
